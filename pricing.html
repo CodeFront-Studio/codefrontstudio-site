@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — CodeFront Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950: #08141F;
+    --navy-900: #0B1E30;
+    --navy-800: #122A42;
+    --line: #2A4A6B;
+    --cyan: #7DD3FC;
+    --teal: #99F6E4;
+    --amber: #FBBF24;
+    --paper: #E7F1F8;
+    --muted: #86A0B8;
+    --font-display: 'Space Grotesk', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background: var(--navy-950); color: var(--paper);
+    font-family: var(--font-display); line-height: 1.6;
+    background-image:
+      linear-gradient(var(--navy-900) 1px, transparent 1px),
+      linear-gradient(90deg, var(--navy-900) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-attachment: fixed;
+  }
+  a { color: var(--cyan); }
+  .wrap{ max-width: 1040px; margin:0 auto; padding: 0 24px; }
+  header{ position: sticky; top:0; z-index: 10; background: rgba(8,20,31,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding: 18px 24px; max-width: 1040px; margin:0 auto; }
+  .logo{ font-family: var(--font-mono); font-weight: 600; font-size: 15px; display:flex; align-items:center; gap:8px; }
+  .logo .dot{ width:8px; height:8px; background: var(--amber); border-radius:1px; display:inline-block; }
+  .navlinks{ display:flex; gap: 28px; font-size: 14px; }
+  .navlinks a{ text-decoration:none; color: var(--muted); }
+  .navlinks a:hover{ color: var(--paper); }
+
+  main{ padding: 72px 0 96px; text-align:center; }
+  .eyebrow{ font-family: var(--font-mono); font-size: 13px; color: var(--cyan); letter-spacing:0.1em; text-transform:uppercase; margin-bottom: 16px; }
+  h1{ font-size: clamp(32px, 5vw, 44px); font-weight:700; margin-bottom: 16px; }
+  .sub{ color: var(--muted); font-size: 17px; max-width: 520px; margin: 0 auto 56px; }
+
+  .plans{ display:flex; justify-content:center; gap: 28px; flex-wrap: wrap; text-align:left; }
+  .plan{
+    background: var(--navy-900); border: 1px solid var(--line); border-radius: 6px;
+    padding: 36px 32px; width: 320px; position:relative;
+  }
+  .plan.featured{ border-color: var(--cyan); }
+  .plan .badge{
+    position:absolute; top:-13px; left:32px; background: var(--cyan); color: var(--navy-950);
+    font-family: var(--font-mono); font-size: 11px; font-weight:600; letter-spacing:0.06em;
+    padding: 4px 10px; border-radius: 20px; text-transform:uppercase;
+  }
+  .plan h2{ font-size: 15px; font-family: var(--font-mono); color: var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom: 18px; }
+  .price{ font-size: 42px; font-weight:700; margin-bottom: 4px; }
+  .price span{ font-size: 16px; color: var(--muted); font-weight:400; }
+  .plan .desc{ color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+  .plan ul{ list-style:none; margin-bottom: 28px; }
+  .plan li{ font-size: 14px; margin-bottom: 12px; padding-left: 22px; position:relative; color: var(--paper); }
+  .plan li::before{ content:'✓'; position:absolute; left:0; color: var(--cyan); font-family: var(--font-mono); }
+  .btn{
+    display:block; text-align:center; font-family: var(--font-mono); font-size: 14px; font-weight:500;
+    padding: 13px 0; border-radius: 3px; text-decoration:none; transition: all 0.15s;
+  }
+  .btn-primary{ background: var(--cyan); color: var(--navy-950); }
+  .btn-primary:hover{ background: var(--teal); }
+  .btn-ghost{ border: 1px solid var(--line); color: var(--paper); }
+  .btn-ghost:hover{ border-color: var(--cyan); color: var(--cyan); }
+
+  .faq{ max-width: 640px; margin: 80px auto 0; text-align:left; }
+  .faq h3{ font-size: 22px; margin-bottom: 24px; text-align:center; }
+  .faq-item{ border-bottom: 1px solid var(--line); padding: 18px 0; }
+  .faq-item h4{ font-size: 15px; margin-bottom: 8px; }
+  .faq-item p{ font-size: 14px; color: var(--muted); }
+
+  footer{ border-top: 1px solid var(--line); padding: 32px 0; }
+  .footer-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .footer-links{ display:flex; gap:24px; font-size:13px; }
+  .footer-links a{ color: var(--muted); text-decoration:none; }
+  .footer-links a:hover{ color: var(--paper); }
+  .copyright{ font-family: var(--font-mono); font-size:12px; color: var(--line); }
+
+  @media (max-width: 700px){ .plans{ flex-direction:column; align-items:center; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>CODEFRONT STUDIO</div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="mailto:codefrontgames@gmail.com">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="eyebrow">Pricing</div>
+  <h1>One tool. One fair price.</h1>
+  <p class="sub">No bloated tiers, no confusing add-ons — just a straightforward subscription for a tool that fixes a real problem.</p>
+
+  <div class="plans">
+    <div class="plan">
+      <h2>Free</h2>
+      <div class="price">$0</div>
+      <p class="desc">Try the core feature before you commit.</p>
+      <ul>
+        <li>Core functionality, limited usage</li>
+        <li>Community support</li>
+        <li>No credit card required</li>
+      </ul>
+      <a href="#" class="btn btn-ghost">Add to Chrome — Free</a>
+    </div>
+
+    <div class="plan featured">
+      <span class="badge">Most popular</span>
+      <h2>Pro</h2>
+      <div class="price">$9.99<span>/month</span></div>
+      <p class="desc">Full access, no limits, cancel anytime.</p>
+      <ul>
+        <li>Unlimited usage</li>
+        <li>Priority email support</li>
+        <li>New features as they ship</li>
+        <li>30-day money-back guarantee</li>
+      </ul>
+      <a href="#" class="btn btn-primary">Start Pro — $9.99/mo</a>
+    </div>
+  </div>
+
+  <div class="faq">
+    <h3>Questions</h3>
+    <div class="faq-item">
+      <h4>Can I cancel anytime?</h4>
+      <p>Yes. Cancel from your account portal whenever you like — no phone calls, no retention flow, no hassle.</p>
+    </div>
+    <div class="faq-item">
+      <h4>What happens to my data if I cancel?</h4>
+      <p>Your local settings stay on your device. Any account-linked data is retained for 30 days in case you resubscribe, then deleted.</p>
+    </div>
+    <div class="faq-item">
+      <h4>Do you offer refunds?</h4>
+      <p>Yes — a full 30-day money-back guarantee on Pro, no questions asked. See our <a href="terms.html">Terms</a> for details.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="copyright">© 2026 CodeFront Studio</div>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

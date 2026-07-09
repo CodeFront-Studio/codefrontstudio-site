@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeFront Studio — Tools that fix the annoying stuff</title>
+<meta name="description" content="CodeFront Studio builds small, sharp developer tools that fix specific, painful workflow problems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950: #08141F;
+    --navy-900: #0B1E30;
+    --navy-800: #122A42;
+    --navy-700: #1B3A58;
+    --line: #2A4A6B;
+    --cyan: #7DD3FC;
+    --teal: #99F6E4;
+    --amber: #FBBF24;
+    --paper: #E7F1F8;
+    --muted: #86A0B8;
+    --font-display: 'Space Grotesk', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior:smooth; }
+
+  body{
+    background: var(--navy-950);
+    color: var(--paper);
+    font-family: var(--font-display);
+    line-height: 1.5;
+    background-image:
+      linear-gradient(var(--navy-900) 1px, transparent 1px),
+      linear-gradient(90deg, var(--navy-900) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-attachment: fixed;
+  }
+
+  a { color: inherit; }
+
+  .wrap{ max-width: 1040px; margin:0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  header{
+    position: sticky; top:0; z-index: 10;
+    background: rgba(8,20,31,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 24px; max-width: 1040px; margin:0 auto;
+  }
+  .logo{
+    font-family: var(--font-mono);
+    font-weight: 600; font-size: 15px; letter-spacing: 0.02em;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{ width:8px; height:8px; background: var(--amber); border-radius:1px; display:inline-block; }
+  .navlinks{ display:flex; gap: 28px; font-size: 14px; }
+  .navlinks a{ text-decoration:none; color: var(--muted); transition: color 0.15s; }
+  .navlinks a:hover{ color: var(--paper); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 96px 0 72px; border-bottom: 1px solid var(--line); position:relative; }
+  .ticket-id{
+    font-family: var(--font-mono); font-size: 13px; color: var(--cyan);
+    letter-spacing: 0.08em; margin-bottom: 20px; display:flex; align-items:center; gap:10px;
+  }
+  .ticket-id::before{ content:''; width:20px; height:1px; background: var(--cyan); }
+  h1{
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700; line-height: 1.1;
+    max-width: 720px; margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  h1 span{ color: var(--cyan); }
+  .hero p{
+    font-size: 18px; color: var(--muted); max-width: 560px; margin-bottom: 36px;
+  }
+  .cta-row{ display:flex; gap:16px; flex-wrap:wrap; }
+  .btn{
+    font-family: var(--font-mono); font-size: 14px; font-weight:500;
+    padding: 13px 22px; border-radius: 3px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+  .btn-primary{ background: var(--cyan); color: var(--navy-950); }
+  .btn-primary:hover{ background: var(--teal); transform: translateY(-1px); }
+  .btn-ghost{ border-color: var(--line); color: var(--paper); }
+  .btn-ghost:hover{ border-color: var(--cyan); color: var(--cyan); }
+
+  /* ---------- Section shared ---------- */
+  section{ padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .eyebrow{
+    font-family: var(--font-mono); font-size: 13px; color: var(--muted);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  h2{ font-size: 28px; font-weight: 600; margin-bottom: 16px; max-width: 600px; }
+  .lead{ color: var(--muted); max-width: 580px; font-size: 16px; margin-bottom: 40px; }
+
+  /* ---------- How we work ---------- */
+  .steps{ display:grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .step{
+    background: var(--navy-900); border: 1px solid var(--line);
+    border-radius: 4px; padding: 24px;
+  }
+  .step .num{
+    font-family: var(--font-mono); color: var(--amber); font-size: 13px; margin-bottom: 14px; display:block;
+  }
+  .step h3{ font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .step p{ font-size: 14px; color: var(--muted); }
+
+  /* ---------- Ticket / product card ---------- */
+  .ticket{
+    background: var(--navy-900); border: 1px solid var(--line); border-radius: 4px;
+    padding: 28px; position: relative; overflow:hidden;
+  }
+  .ticket-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+  }
+  .ticket-head h3{ font-size: 18px; font-weight: 600; }
+  .status{
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+    padding: 5px 10px; border-radius: 20px; border: 1px solid;
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .status.progress{ color: var(--amber); border-color: var(--amber); }
+  .ticket p.desc{ color: var(--muted); font-size: 15px; margin-bottom: 4px; }
+  .ticket .meta{ font-family: var(--font-mono); font-size: 12px; color: var(--line); margin-top: 16px; }
+
+  /* ---------- About ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items:start; }
+  .about-grid p{ color: var(--muted); font-size: 16px; margin-bottom: 16px; max-width: 520px; }
+  .about-grid strong{ color: var(--paper); }
+  .prior-work{
+    background: var(--navy-900); border: 1px solid var(--line); border-radius: 4px; padding: 20px;
+  }
+  .prior-work .eyebrow{ margin-bottom: 14px; }
+  .prior-work ul{ list-style:none; }
+  .prior-work li{ font-size: 14px; margin-bottom: 10px; padding-left: 16px; position:relative; }
+  .prior-work li::before{ content:'—'; position:absolute; left:0; color: var(--cyan); }
+  .prior-work a{ text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+  .prior-work a:hover{ text-decoration-color: var(--cyan); }
+
+  /* ---------- Footer ---------- */
+  footer{ padding: 40px 0; }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-links{ display:flex; gap: 24px; font-size: 13px; }
+  .footer-links a{ color: var(--muted); text-decoration:none; }
+  .footer-links a:hover{ color: var(--paper); }
+  .copyright{ font-family: var(--font-mono); font-size: 12px; color: var(--line); }
+
+  @media (max-width: 720px){
+    .steps{ grid-template-columns: 1fr; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .navlinks{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="dot"></span>CODEFRONT STUDIO</div>
+    <div class="navlinks">
+      <a href="#work">In progress</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="#about">About</a>
+      <a href="mailto:codefrontgames@gmail.com">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="ticket-id">ISSUE #001 — OPEN</div>
+    <h1>We fix the small things that <span>quietly ruin your day.</span></h1>
+    <p>CodeFront Studio builds small, sharp developer tools — the kind that fix one specific, annoying problem instead of trying to be a platform. If it's broken, missing, or badly duct-taped together, that's what we go after.</p>
+    <div class="cta-row">
+      <a href="#work" class="btn btn-primary">See what's in progress →</a>
+      <a href="mailto:codefrontgames@gmail.com" class="btn btn-ghost">Tell us what's annoying you</a>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow">Current build</div>
+    <h2>What's on the bench right now</h2>
+    <p class="lead">We find real, recurring complaints from developer forums, review sections, and issue trackers — then build the smallest thing that actually fixes it.</p>
+
+    <div class="ticket">
+      <div class="ticket-head">
+        <h3>First tool — in development</h3>
+        <span class="status progress">In Progress</span>
+      </div>
+      <p class="desc">Details go up here the moment it's ready to ship. Check back soon, or leave your email below and we'll let you know directly.</p>
+      <div class="meta">assigned: codefront-studio · filed: 2026</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2>Built by one developer, not a team</h2>
+    <div class="about-grid">
+      <div>
+        <p>CodeFront Studio is a one-person shop. <strong>No roadmap decided by committee, no bloated feature creep</strong> — just one developer, building fast and shipping tools that solve real, specific problems.</p>
+        <p>Three years of self-taught coding across <strong>Python, JavaScript, and C#</strong> — started as a hobby, stayed one. Along the way: game AIs, small automation scripts, and now, tools built for other developers.</p>
+      </div>
+      <div class="prior-work">
+        <div class="eyebrow">Prior work</div>
+        <ul>
+          <li>Unity tools &amp; game systems under <a href="https://github.com/CodeFrontGames" target="_blank" rel="noopener">CodeFront Games</a></li>
+          <li>AI implementations for Snake and Checkers, fully documented</li>
+          <li>Listed on the Unity Asset Store</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="wrap">
+    <div class="eyebrow">How it works</div>
+    <h2>No bloat. No confusing tiers. Just a fair monthly price.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <h3>Find the pain</h3>
+        <p>Real complaints pulled from forums, reviews, and issue trackers — not guesses about what devs might want.</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <h3>Build the fix</h3>
+        <p>Small, focused tools that solve one problem well, shipped fast rather than over-engineered.</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <h3>Ship it cheap</h3>
+        <p>Priced fairly, not aggressively — a small monthly fee for a tool that keeps working, keeps updating, and keeps fixing the problem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="copyright">© 2026 CodeFront Studio</div>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="https://github.com/CodeFront-Studio" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
